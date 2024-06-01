@@ -1,8 +1,8 @@
-import { ProductData } from "@/models/ProductData";
+import { Product } from "@/models/Product";
 import { PRODUCTS_ENDPOINT } from "@libs/services/http";
 import swal from "sweetalert";
 
-export const handleCreateProduct = async (productData: ProductData) => {
+export const handleCreateProduct = async (productData: Product) => {
   try {
     const response = await fetch(PRODUCTS_ENDPOINT, {
       method: 'POST',

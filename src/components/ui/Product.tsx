@@ -5,7 +5,7 @@ import SelectInputOption from '@/models/SelectInputOption'
 import TextInput2 from './TextInput2';
 import TextArea from './TextArea';
 import OrderProduct from '@/models/OrderProduct';
-import { ProductContext } from '@/routes/waiter';
+import OrderProductContext from '@/contexts/ProductsContext';
 
 interface props {
   index?: number;
@@ -13,24 +13,25 @@ interface props {
 }
 
 const ProductComponent: React.FC<props> = ({ products, index }) => {
-  const productsData = useContext(ProductContext);
   const defaultData: OrderProduct = { name: '', price: 0, note: '', quantity: 0 }
   const [orderProduct, setOrderProduct] = useState<OrderProduct>(defaultData)
+  const { orderProducts, setOrderProducts } = useContext(OrderProductContext)
   const options: SelectInputOption[] = products.map((product, idx) => {
     return { name: product.name, value: idx }
   })
 
   useEffect(() => {
-    if (productsData.productsData[index] === undefined) {
-      productsData.setProductsData([
-        ...productsData.productsData,
+    console.log(index)
+    if (orderProducts[index] !== undefined) {
+      setOrderProducts([
+        ...orderProducts,
         orderProduct
       ])
+      console.log("changing product")
     } else {
-      const newArray = productsData.productsData
-      newArray[index] = orderProduct
-      productsData.setProductsData(newArray)
+      orderProducts.push(orderProduct)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [orderProduct, index])
 
   // Function to handle input changes
@@ -41,6 +42,11 @@ const ProductComponent: React.FC<props> = ({ products, index }) => {
       [name]: value
     });
   };
+
+  useEffect(() => {
+    console.log(orderProduct)
+    console.log(orderProducts)
+  }, [orderProduct])
 
   // Function to handle select changes
   const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {

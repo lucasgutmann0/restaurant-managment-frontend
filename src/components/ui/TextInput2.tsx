@@ -2,7 +2,7 @@ import React, { InputHTMLAttributes } from 'react'
 
 interface props extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
-  type: React.HTMLInputTypeAttribute;
+  type?: React.HTMLInputTypeAttribute;
 }
 
 const TextInput2: React.FC<props> = ({ label, type, ...props }) => {
