@@ -21,7 +21,6 @@ const ProductComponent: React.FC<props> = ({ products, index }) => {
   })
 
   useEffect(() => {
-    console.log(index)
     if (orderProducts[index] !== undefined) {
       setOrderProducts([
         ...orderProducts,
@@ -29,7 +28,7 @@ const ProductComponent: React.FC<props> = ({ products, index }) => {
       ])
       console.log("changing product")
     } else {
-      orderProducts.push(orderProduct)
+      // orderProducts.push(orderProduct)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [orderProduct, index])

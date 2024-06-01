@@ -33,6 +33,7 @@ const WaiterRoute: React.FC<props> = () => {
       />
     ];
 
+    setTableBody([])
     console.log(productsData)
     setProducts(newComponents);
   };
